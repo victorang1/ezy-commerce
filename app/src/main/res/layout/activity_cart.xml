@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="subtotal"
+            type="String" />
+        <variable
+            name="total"
+            type="String" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:fillViewport="true"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/dimen_12dp"
+                >
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_carts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <View
+                    android:id="@+id/separator_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/separator_size"
+                    android:background="@color/black"
+                    android:layout_marginTop="@dimen/dimen_12dp"
+                    app:layout_constraintTop_toBottomOf="@id/rv_carts"
+                    />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_subtotal_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_12dp"
+                    android:layout_marginEnd="@dimen/dimen_12dp"
+                    android:text="@string/text_subtotal"
+                    android:textSize="@dimen/text_16sp"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="@dimen/dimen_12dp"
+                    app:layout_constraintTop_toBottomOf="@+id/separator_line"
+                    app:layout_constraintEnd_toEndOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_subtotal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_12dp"
+                    android:layout_marginEnd="@dimen/dimen_12dp"
+                    android:text="@{subtotal}"
+                    android:textSize="@dimen/text_16sp"
+                    tools:text="test"
+                    android:textAlignment="textEnd"
+                    android:layout_marginTop="@dimen/dimen_12dp"
+                    app:layout_constraintTop_toBottomOf="@+id/separator_line"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_shipping_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_12dp"
+                    android:layout_marginEnd="@dimen/dimen_12dp"
+                    android:text="@string/text_shipping"
+                    android:textSize="@dimen/text_16sp"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="@dimen/dimen_12dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_subtotal_label"
+                    app:layout_constraintEnd_toEndOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_shipping"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_12dp"
+                    android:layout_marginEnd="@dimen/dimen_12dp"
+                    android:text="@string/text_free"
+                    android:textSize="@dimen/text_16sp"
+                    android:textAlignment="textEnd"
+                    android:layout_marginTop="@dimen/dimen_12dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_subtotal"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_taxes_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_12dp"
+                    android:layout_marginEnd="@dimen/dimen_12dp"
+                    android:text="@string/text_taxes"
+                    android:textSize="@dimen/text_16sp"
+                    android:layout_marginTop="@dimen/dimen_12dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_shipping_label"
+                    app:layout_constraintEnd_toEndOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_taxes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_12dp"
+                    android:layout_marginEnd="@dimen/dimen_12dp"
+                    android:text="@string/taxes"
+                    android:textSize="@dimen/text_16sp"
+                    android:textAlignment="textEnd"
+                    android:layout_marginTop="@dimen/dimen_12dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_shipping"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <View
+                    android:id="@+id/separator_line_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/separator_size"
+                    android:background="@color/black"
+                    android:layout_marginTop="@dimen/dimen_12dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_taxes_label"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_total_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_12dp"
+                    android:layout_marginEnd="@dimen/dimen_12dp"
+                    android:text="@string/text_total"
+                    android:textSize="@dimen/text_16sp"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="@dimen/dimen_12dp"
+                    app:layout_constraintTop_toBottomOf="@+id/separator_line_total"
+                    app:layout_constraintEnd_toEndOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_total"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_12dp"
+                    android:layout_marginEnd="@dimen/dimen_12dp"
+                    android:text="@{total}"
+                    android:textSize="@dimen/text_16sp"
+                    android:textAlignment="textEnd"
+                    android:layout_marginTop="@dimen/dimen_12dp"
+                    app:layout_constraintTop_toBottomOf="@+id/separator_line_total"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <Button
+                    android:id="@+id/btn_checkout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_12dp"
+                    android:layout_marginEnd="@dimen/dimen_12dp"
+                    android:textColor="@color/white"
+                    android:text="@string/text_checkout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_total_label"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_no_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_no_data"
+                android:textSize="@dimen/text_24sp"
+                android:textColor="@color/black"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

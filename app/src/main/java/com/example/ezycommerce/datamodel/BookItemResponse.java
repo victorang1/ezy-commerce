@@ -9,6 +9,7 @@ public class BookItemResponse {
     private String type;
     private String author;
     private String img;
+    private String category;
 
     public Integer getId() {
         return id;
@@ -36,5 +37,9 @@ public class BookItemResponse {
 
     public String getImg() {
         return img;
+    }
+
+    public String getCategory() {
+        return category;
     }
 }

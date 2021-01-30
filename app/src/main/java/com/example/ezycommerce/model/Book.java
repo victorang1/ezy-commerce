@@ -17,6 +17,7 @@ public class Book extends BaseObservable implements Parcelable {
     private String type;
     private String author;
     private String img;
+    private String category;
 
     public Book() {}
 
@@ -99,6 +100,17 @@ public class Book extends BaseObservable implements Parcelable {
     public Book setImg(String img) {
         this.img = img;
         notifyPropertyChanged(BR.img);
+        return this;
+    }
+
+    @Bindable
+    public String getCategory() {
+        return category;
+    }
+
+    public Book setCategory(String category) {
+        this.category = category;
+        notifyPropertyChanged(BR.category);
         return this;
     }
 

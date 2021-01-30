@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class BookListFragment extends Fragment {
 
+    public BookListFragment() {}
+
     private BookListFragment(ArrayList<Book> books, BookListAdapter.IBookListAction mListener) {
         this.books = books;
         this.mListener = mListener;

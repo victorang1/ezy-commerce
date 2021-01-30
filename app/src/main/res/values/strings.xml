@@ -1,4 +1,25 @@
 <resources>
     <string name="app_name">EzyCommerce</string>
     <string name="text_price_display">$%s</string>
+    <string name="text_category">Category</string>
+    <string name="text_type">Type</string>
+    <string name="text_description">Description</string>
+    <string name="text_buy">Buy</string>
+    <string name="text_cart">Cart</string>
+    <string name="text_add_success">Add to cart success</string>
+    <string name="text_add_failed">Add to cart failed</string>
+    <string name="text_subtotal">Subtotal</string>
+    <string name="text_shipping">Shipping</string>
+    <string name="text_taxes">Taxes</string>
+    <string name="text_free">FREE</string>
+    <string name="text_total">Total</string>
+    <string name="taxes">$10</string>
+    <string name="text_checkout">Checkout</string>
+    <string name="text_information">Information</string>
+    <string name="text_yes">Yes</string>
+    <string name="text_no">No</string>
+    <string name="text_no_data">No Data</string>
+    <string name="text_checkout_success">Checkout success</string>
+    <string name="text_checkout_failed">Checkout failed</string>
+    <string name="text_dialog_checkout">Are you sure you want to checkout?</string>
 </resources>

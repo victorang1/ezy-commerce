@@ -40,6 +40,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
     public void onBindViewHolder(@NonNull BookListViewHolder holder, int position) {
         Book book = books.get(position);
         holder.bind(book, context);
+        holder.itemLayoutBinding.getRoot().setOnClickListener(v -> mListener.onBookSelected(book));
     }
 
     @Override
