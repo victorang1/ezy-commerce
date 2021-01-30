@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
@@ -21,7 +20,6 @@ import com.example.ezycommerce.model.Book;
 import com.example.ezycommerce.model.Category;
 import com.example.ezycommerce.service.ApiClient;
 import com.example.ezycommerce.ui.cart.CartActivity;
-import com.example.ezycommerce.ui.cart.CartAdapter;
 import com.example.ezycommerce.ui.detail.DetailActivity;
 import com.example.ezycommerce.ui.detail.DetailFragment;
 import com.example.ezycommerce.ui.list.BookListAdapter;
@@ -61,10 +59,10 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.I
                     filteredList.add(book);
                 }
             }
-            fragment = BookListFragment.newInstance(filteredList, MainActivity.this);
+            fragment = BookListFragment.newInstance(filteredList);
         }
         else {
-            fragment = BookListFragment.newInstance(books, MainActivity.this);
+            fragment = BookListFragment.newInstance(books);
         }
         loadFragment(fragment);
     }
@@ -102,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.I
                             ArrayList<Category> resultCategories = MappingUtil.mapResponseToCategory(bookResponse);
                             categoryAdapter.updateData(resultCategories);
                             books.addAll(result);
-                            loadFragment(BookListFragment.newInstance(books, MainActivity.this));
+                            loadFragment(BookListFragment.newInstance(books));
                         }
                     }
 

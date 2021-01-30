@@ -16,7 +16,6 @@ import com.example.ezycommerce.db.AppDatabase;
 import com.example.ezycommerce.model.Cart;
 import com.example.ezycommerce.ui.main.MainActivity;
 import com.example.ezycommerce.util.PriceUtil;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -45,25 +44,40 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ICart
     @Override
     public void onClick(View v) {
         if (v.equals(binding.btnCheckout)) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setTitle(getString(R.string.text_information))
-                .setMessage(getString(R.string.text_dialog_checkout))
-                .setPositiveButton(getString(R.string.text_yes), (dialog, id) -> {
-                    if (db.resetCart()) {
-                        startActivity(new Intent(CartActivity.this, MainActivity.class));
-                        finish();
-                        Toast.makeText(CartActivity.this, getString(R.string.text_checkout_success), Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Toast.makeText(CartActivity.this, getString(R.string.text_checkout_failed), Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton(getString(R.string.text_no), (dialog, id) -> {
-                    dialog.cancel();
-                });
-            AlertDialog alert = builder.create();
-            alert.show();
+            if (isCheckoutValid()) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.text_information))
+                        .setMessage(getString(R.string.text_dialog_checkout))
+                        .setPositiveButton(getString(R.string.text_yes), (dialog, id) -> {
+                            if (db.resetCart()) {
+                                startActivity(new Intent(CartActivity.this, MainActivity.class));
+                                finish();
+                                Toast.makeText(CartActivity.this, getString(R.string.text_checkout_success), Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(CartActivity.this, getString(R.string.text_checkout_failed), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton(getString(R.string.text_no), (dialog, id) -> dialog.cancel());
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+            else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.text_information))
+                        .setMessage(getString(R.string.text_input_quantity))
+                        .setPositiveButton(getString(R.string.text_ok), (dialog, id) -> dialog.cancel());
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
         }
+    }
+
+    private boolean isCheckoutValid() {
+        for (Cart cart : cartAdapter.getCarts()) {
+            if (cart.getError()) return false;
+        }
+        return true;
     }
 
     private void initializeAdapter() {

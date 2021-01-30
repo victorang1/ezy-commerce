@@ -1,5 +1,6 @@
 package com.example.ezycommerce.ui.list;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,15 +18,15 @@ import java.util.ArrayList;
 
 public class BookListFragment extends Fragment {
 
-    public BookListFragment() {}
+    public static final String BOOKS = "books";
 
-    private BookListFragment(ArrayList<Book> books, BookListAdapter.IBookListAction mListener) {
-        this.books = books;
-        this.mListener = mListener;
-    }
+    public static BookListFragment newInstance(ArrayList<Book> books) {
 
-    public static BookListFragment newInstance(ArrayList<Book> books, BookListAdapter.IBookListAction mListener) {
-       return new BookListFragment(books, mListener);
+        Bundle args = new Bundle();
+        args.putParcelableArrayList(BOOKS, books);
+        BookListFragment fragment = new BookListFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     private ArrayList<Book> books;
@@ -37,6 +38,10 @@ public class BookListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentBookListBinding.inflate(inflater, container, false);
+        if (getArguments() != null) {
+            books = getArguments().getParcelableArrayList(BOOKS);
+        }
+        else books = new ArrayList<>();
         return binding.getRoot();
     }
 
@@ -44,6 +49,12 @@ public class BookListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeAdapter();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.mListener = (BookListAdapter.IBookListAction) context;
     }
 
     private void initializeAdapter() {

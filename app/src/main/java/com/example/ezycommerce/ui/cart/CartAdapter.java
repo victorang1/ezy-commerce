@@ -109,6 +109,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         }
     }
 
+    public ArrayList<Cart> getCarts() {
+        return carts;
+    }
+
     public interface ICartAction {
         void updateTotal(Double subtotal, Double total);
     }
