@@ -1,4 +1,4 @@
-package com.example.ezycommerce.ui;
+package com.example.ezycommerce.ui.main;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 
     private final ArrayList<Category> categories;
-    private ICategoryAction mListener;
+    private final ICategoryAction mListener;
 
     public CategoryAdapter(ICategoryAction listener) {
         categories = new ArrayList<>();
@@ -46,7 +46,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 }
                 index++;
             }
-            mListener.onCategoryClick(category);
+            boolean isSelectedExists = false;
+            for (Category c : categories) {
+                if (c.getSelected()) {
+                    isSelectedExists = true;
+                    break;
+                }
+            }
+            mListener.onCategoryClick(category, isSelectedExists);
         });
     }
 
@@ -63,7 +70,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     static class CategoryViewHolder extends RecyclerView.ViewHolder {
 
-        private CategoryItemLayoutBinding itemLayoutBinding;
+        private final CategoryItemLayoutBinding itemLayoutBinding;
 
         public CategoryViewHolder(CategoryItemLayoutBinding itemLayoutBinding) {
             super(itemLayoutBinding.getRoot());
@@ -76,6 +83,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     public interface ICategoryAction {
-        void onCategoryClick(Category category);
+        void onCategoryClick(Category category, Boolean isSelectedExists);
     }
 }

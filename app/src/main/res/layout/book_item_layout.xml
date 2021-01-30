@@ -12,7 +12,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimen_4dp"
+        android:layout_margin="@dimen/dimen_12dp"
         app:cardCornerRadius="@dimen/dimen_4dp"
         app:cardElevation="@dimen/cardview_default_elevation"
         >
@@ -20,7 +20,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dimen_12dp"
             >
 
             <ImageView
@@ -36,10 +35,11 @@
                 android:id="@+id/tv_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_12dp"
                 android:layout_marginStart="@dimen/dimen_12dp"
                 android:layout_marginEnd="@dimen/dimen_12dp"
                 android:text="@{book.name}"
-                android:textSize="@dimen/text_24sp"
+                android:textSize="@dimen/text_20sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 tools:text="The Power of HABIT"
@@ -52,8 +52,8 @@
                 android:id="@+id/tv_author"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:textSize="@dimen/text_20sp"
+                android:layout_marginTop="@dimen/dimen_4dp"
+                android:textSize="@dimen/text_16sp"
                 android:text="@{book.author}"
                 tools:text="Charles Duhigg"
                 app:layout_constraintTop_toBottomOf="@id/tv_name"
@@ -65,14 +65,17 @@
                 android:id="@+id/tv_price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:textSize="@dimen/text_20sp"
+                android:layout_marginTop="@dimen/dimen_4dp"
+                android:layout_marginBottom="@dimen/dimen_12dp"
+                android:textSize="@dimen/text_16sp"
                 android:text="@{@string/text_price_display(book.price)}"
                 tools:text="$16.33"
+                app:layout_constraintVertical_bias="0"
                 android:textColor="@color/red"
                 app:layout_constraintTop_toBottomOf="@id/tv_author"
                 app:layout_constraintStart_toStartOf="@id/tv_name"
                 app:layout_constraintEnd_toEndOf="@id/tv_name"
+                app:layout_constraintBottom_toBottomOf="parent"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

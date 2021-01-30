@@ -1,11 +1,14 @@
 package com.example.ezycommerce.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 import com.example.ezycommerce.BR;
 
-public class Book extends BaseObservable {
+public class Book extends BaseObservable implements Parcelable {
 
     private Integer id;
     private String name;
@@ -14,6 +17,13 @@ public class Book extends BaseObservable {
     private String type;
     private String author;
     private String img;
+
+    public Book() {}
+
+    public Book(Parcel in) {
+        super();
+        readFromParcel(in);
+    }
 
     @Bindable
     public Integer getId() {
@@ -90,5 +100,53 @@ public class Book extends BaseObservable {
         this.img = img;
         notifyPropertyChanged(BR.img);
         return this;
+    }
+
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel in) {
+            return new Book(in);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
+
+    public void readFromParcel(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        description = in.readString();
+        price = in.readFloat();
+        type = in.readString();
+        author = in.readString();
+        img = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        dest.writeString(name);
+        dest.writeString(description);
+        if (price == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(price);
+        }
+        dest.writeString(type);
+        dest.writeString(author);
+        dest.writeString(img);
     }
 }
