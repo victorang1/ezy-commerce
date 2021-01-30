@@ -7,7 +7,7 @@ public class ApiClient {
 
     private static Retrofit mClient;
 
-    private Retrofit getClient() {
+    private static Retrofit getClient() {
         if (mClient == null) {
             mClient = new Retrofit.Builder()
                     .baseUrl("https://u73olh7vwg.execute-api.ap-northeast-2.amazonaws.com/")
@@ -17,7 +17,7 @@ public class ApiClient {
         return mClient;
     }
 
-    public ApiService service() {
+    public static ApiService service() {
         return getClient().create(ApiService.class);
     }
 }
