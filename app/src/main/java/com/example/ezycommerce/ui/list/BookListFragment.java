@@ -31,7 +31,6 @@ public class BookListFragment extends Fragment {
     private ArrayList<Book> books;
     private BookListAdapter.IBookListAction mListener;
     private FragmentBookListBinding binding;
-    private BookListAdapter bookListAdapter;
 
     @Nullable
     @Override
@@ -57,7 +56,7 @@ public class BookListFragment extends Fragment {
     }
 
     private void initializeAdapter() {
-        bookListAdapter = new BookListAdapter(requireContext(), mListener);
+        BookListAdapter bookListAdapter = new BookListAdapter(requireContext(), mListener);
         binding.rvBooks.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvBooks.setAdapter(bookListAdapter);
         bookListAdapter.updateData(books);

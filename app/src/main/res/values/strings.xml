@@ -18,10 +18,11 @@
     <string name="text_information">Information</string>
     <string name="text_yes">Yes</string>
     <string name="text_no">No</string>
-    <string name="text_ok">Ok</string>
+    <string name="text_ok">OK</string>
     <string name="text_no_data">No Data</string>
     <string name="text_checkout_success">Checkout success</string>
     <string name="text_checkout_failed">Checkout failed</string>
     <string name="text_dialog_checkout">Are you sure you want to checkout?</string>
     <string name="text_input_quantity">Please input proper quantity</string>
+    <string name="text_image_content_description">Image</string>
 </resources>

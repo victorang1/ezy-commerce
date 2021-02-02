@@ -16,7 +16,7 @@
         android:backgroundTint="@{category.selected ? @color/teal_700 : @color/white}"
         android:layout_marginTop="@dimen/dimen_8dp"
         android:layout_marginBottom="@dimen/dimen_8dp"
-        android:layout_marginLeft="@dimen/dimen_8dp"
+        android:layout_marginStart="@dimen/dimen_8dp"
         app:cardElevation="@dimen/cardview_default_elevation"
         >
 

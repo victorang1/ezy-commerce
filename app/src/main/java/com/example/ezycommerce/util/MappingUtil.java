@@ -26,7 +26,7 @@ public class MappingUtil {
     }
 
     public static Book mapResponseToBook(BookItemResponse itemResponse) {
-        Book book = new Book()
+        return new Book()
                 .setId(itemResponse.getId())
                 .setName(itemResponse.getName())
                 .setDescription(itemResponse.getDescription())
@@ -35,7 +35,6 @@ public class MappingUtil {
                 .setPrice(itemResponse.getPrice())
                 .setType(itemResponse.getType())
                 .setCategory(itemResponse.getCategory());
-        return book;
     }
 
     public static ArrayList<Category> mapResponseToCategory(ArrayList<BookItemResponse> responses) {

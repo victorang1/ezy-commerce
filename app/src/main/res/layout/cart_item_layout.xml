@@ -19,6 +19,7 @@
             android:id="@+id/iv_photo"
             android:layout_width="@dimen/cart_image_size"
             android:layout_height="@dimen/cart_image_size"
+            android:contentDescription="@string/text_image_content_description"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             />
