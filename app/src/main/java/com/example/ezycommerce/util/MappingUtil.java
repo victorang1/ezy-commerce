@@ -1,11 +1,8 @@
 package com.example.ezycommerce.util;
 
-import android.util.Log;
-
 import com.example.ezycommerce.datamodel.BookItemResponse;
 import com.example.ezycommerce.model.Book;
 import com.example.ezycommerce.model.Category;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -29,7 +26,6 @@ public class MappingUtil {
     }
 
     public static Book mapResponseToBook(BookItemResponse itemResponse) {
-        Log.d("<RESULT>", "mapResponseToBook: " + new Gson().toJson(itemResponse));
         Book book = new Book()
                 .setId(itemResponse.getId())
                 .setName(itemResponse.getName())

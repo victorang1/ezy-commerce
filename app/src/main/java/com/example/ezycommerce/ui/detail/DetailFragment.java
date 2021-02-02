@@ -1,7 +1,6 @@
 package com.example.ezycommerce.ui.detail;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +64,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     }
 
     private void loadBookDataById() {
+        binding.content.setVisibility(View.GONE);
+        binding.progressBar.setVisibility(View.VISIBLE);
         ApiClient.service().getBookById(selectedBookId, BuildConfig.USER_ID, BuildConfig.USERNAME)
                 .enqueue(new Callback<BookResponse>() {
                     @Override
@@ -75,16 +76,16 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                             Glide.with(requireContext())
                                     .load(result.getImg())
                                     .into(binding.ivPhoto);
-                        }
-                        else {
-                            Log.d("<RESULT>", "onResponse FAILED: ");
+                            binding.progressBar.setVisibility(View.GONE);
+                            binding.content.setVisibility(View.VISIBLE);
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BookResponse> call, Throwable t) {
                         t.printStackTrace();
-                        Log.d("<RESULT>", "onFailure: ");
+                        binding.progressBar.setVisibility(View.GONE);
+                        binding.content.setVisibility(View.GONE);
                     }
                 });
     }

@@ -4,12 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.ezycommerce.BuildConfig;
 import com.example.ezycommerce.R;
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.I
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         books = new ArrayList<>();
+        initializeToolbar();
         initializeAdapter();
         loadData();
     }
@@ -64,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.I
         else {
             fragment = BookListFragment.newInstance(books);
         }
-        loadFragment(fragment);
+        loadFragment(fragment, true);
     }
 
     @Override
@@ -77,8 +81,16 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.I
         else {
             DetailFragment detail = new DetailFragment();
             detail.setSelectedBookId(book.getId());
-            loadFragment(detail);
+            getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fl_detail_container, detail)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .addToBackStack(null)
+                .commit();
         }
+    }
+
+    private void initializeToolbar() {
+        setSupportActionBar(binding.toolbar);
     }
 
     private void initializeAdapter() {
@@ -93,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.I
                 .enqueue(new Callback<BookResponse>() {
                     @Override
                     public void onResponse(Call<BookResponse> call, Response<BookResponse> response) {
+                        binding.progressBar.setVisibility(View.GONE);
                         books.clear();
                         if (response.isSuccessful() && response.body() != null) {
                             ArrayList<BookItemResponse> bookResponse = response.body().getProducts();
@@ -100,24 +113,30 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.I
                             ArrayList<Category> resultCategories = MappingUtil.mapResponseToCategory(bookResponse);
                             categoryAdapter.updateData(resultCategories);
                             books.addAll(result);
-                            loadFragment(BookListFragment.newInstance(books));
+                            binding.tvUsername.setText(response.body().getUsername());
+                            binding.rvCategories.setVisibility(View.VISIBLE);
+                            loadFragment(BookListFragment.newInstance(books), false);
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BookResponse> call, Throwable t) {
+                        binding.progressBar.setVisibility(View.GONE);
                         t.printStackTrace();
                         books.clear();
                     }
                 });
     }
 
-    private void loadFragment(Fragment fragment) {
+    private void loadFragment(Fragment fragment, boolean addToBackStack) {
         if (fragment != null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fl_list_container, fragment)
-                    .addToBackStack(null)
-                    .commit();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fl_list_container, fragment);
+            if (addToBackStack) {
+                fragmentTransaction.addToBackStack(null);
+            }
+            fragmentTransaction.commit();
         }
     }
 

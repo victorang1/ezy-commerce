@@ -21,7 +21,6 @@ public class BookListFragment extends Fragment {
     public static final String BOOKS = "books";
 
     public static BookListFragment newInstance(ArrayList<Book> books) {
-
         Bundle args = new Bundle();
         args.putParcelableArrayList(BOOKS, books);
         BookListFragment fragment = new BookListFragment();
